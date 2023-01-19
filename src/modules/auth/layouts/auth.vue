@@ -1,7 +1,12 @@
 <template>
   <main id="ds-auth-main" class="p-0 w-100 row mx-0">
     <div id="ds-auth-image" class="col-7 p-0 order-1 d-flex">
-      <DsLogo size="xxl" mode="extensive-white" class="mt-auto ms-4 mb-4" />
+      <DsLogo
+        size="xxl"
+        mode="extensive-white"
+        class="mt-auto mb-4"
+        :class="[$route.name === 'auth.sign-up' ? 'ms-auto me-4' : 'ms-4']"
+      />
     </div>
 
     <div
@@ -38,6 +43,22 @@ export default {
     background-size: cover;
     background-repeat: no-repeat;
     // background: linear-gradient(90deg, rgba(255, 0, 150, 1) 0%, rgba(255, 132, 0, 1) 140%);
+  }
+
+  .ds-button {
+    width: 100%;
+    height: 50px;
+    border-radius: 25px;
+    border: 0px;
+
+    .icon {
+      width: 30px;
+    }
+  }
+
+  .submit {
+    background: rgb(255, 0, 150);
+    background: linear-gradient(90deg, rgba(255, 0, 150, 1) 0%, rgba(255, 132, 0, 1) 95%);
   }
 
   #ds-auth-content {

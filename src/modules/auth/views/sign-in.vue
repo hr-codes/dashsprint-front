@@ -16,7 +16,7 @@
     <div id="ds-login" class="col-12 p-0">
       <form @submit.prevent="submit">
         <div>
-          <label for="" class="col-12 mb-2">E-mail *</label>
+          <label for="" class="col-12 mb-2">Email *</label>
           <input
             type="email"
             name="email"
@@ -27,7 +27,7 @@
         </div>
 
         <div class="mt-3">
-          <label for="" class="col-12 mb-2">Password *</label>
+          <label for="" class="col-12 mb-2">Senha *</label>
           <input
             type="password"
             id="password"
@@ -49,7 +49,8 @@
         </div>
 
         <div class="mt-4 pt-3 text-secondary">
-          Ainda não tem registro? <router-link to="" class="ms-auto">Criar uma conta</router-link>
+          Ainda não tem registro?
+          <router-link :to="{ name: 'auth.sign-up' }" class="ms-auto">Criar uma conta</router-link>
         </div>
       </form>
     </div>
@@ -66,12 +67,14 @@ export default {
     };
   },
   methods: {
-    submit() {
+    async submit() {
       if (this.validator()) {
-        this.signIn();
+        await this.signIn();
       }
     },
     validator() {
+      // TODO: Criar componente de alert e retornar as mensagens de validator e erros da API.
+
       if (!this.email) {
         console.log('preencher email');
 
@@ -88,7 +91,7 @@ export default {
     },
     async signIn() {
       await this.$axios
-        .post('/auth/sign-in/', { email: this.email, password: this.password })
+        .post(`${this.URI.AUTH}/sign-in/`, { email: this.email, password: this.password })
         .then((res) => {
           const token = res.data.token;
 
@@ -98,7 +101,11 @@ export default {
             this.$router.push({ name: 'core.home' });
           }
         })
-        .catch((err) => console.log('err', err));
+        .catch((err) => {
+          console.log(err);
+
+          // FIXME: Tratar erro
+        });
     },
   },
 };
@@ -136,22 +143,6 @@ export default {
       display: inline-block;
       margin-left: 10px;
     }
-  }
-
-  .ds-button {
-    width: 100%;
-    height: 50px;
-    border-radius: 25px;
-    border: 0px;
-
-    .icon {
-      width: 30px;
-    }
-  }
-
-  .submit {
-    background: rgb(255, 0, 150);
-    background: linear-gradient(90deg, rgba(255, 0, 150, 1) 0%, rgba(255, 132, 0, 1) 95%);
   }
 }
 </style>
