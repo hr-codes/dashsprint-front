@@ -100,7 +100,7 @@ export default {
     async createUser() {
       await this.$axios
         .post(`${this.URI.USERS}/`, {
-          first_name: this.firstName,
+          firstName: this.firstName,
           email: this.email,
           password: this.password,
         })
