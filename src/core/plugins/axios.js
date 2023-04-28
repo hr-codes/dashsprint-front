@@ -85,13 +85,7 @@ Axios.interceptors.request.use((config) => {
   const token = localStorage.getItem('access_token');
 
   if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-
-  if (!config.headers['Accept-Language']) {
-    const language = localStorage.getItem('language');
-
-    config.headers['Accept-Language'] = language || 'pt-BR';
+    config.headers['x-access-token'] = token;
   }
 
   return config;

@@ -8,7 +8,7 @@
       <DsLogo size="sm" />
     </header>
 
-    <sidebar id="ds-sidebar" class="p-2"></sidebar>
+    <div id="ds-sidebar" class="p-2"></div>
 
     <main id="ds-main-content" class="col-12">
       <div class="p-4 bg-white rounded shadow-sm">
